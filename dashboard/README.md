@@ -18,7 +18,7 @@ To get started, you will need an AWS account, preferably free from any productio
 
 Before you can build and deploy the [AWS Cloud Development Kit (CDK)](https://aws.amazon.com/cdk/) project, you must perform [CDK bootstrapping](#aws-cdk-bootstrap).
 
-This solution requires [AWS Config](#aws-config), [Amazon QuickSight](#amazon-quicksight) and [AWS Well-Architected Tool](https://aws.amazon.com/well-architected-tool/). Ensure you have proper [AWS IAM](https://aws.amazon.com/iam/) permissions to access and configure the aforementioned services.
+This solution requires [AWS Config](#aws-config), [Amazon QuickSight](#amazon-quicksight), and [AWS Well-Architected Tool](https://aws.amazon.com/well-architected-tool/). Ensure you have proper [AWS IAM](https://aws.amazon.com/iam/) permissions to access and configure the aforementioned services.
 
 ### AWS Cloud9
 

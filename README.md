@@ -18,7 +18,7 @@ If your organization is going through an M&A transaction and would like to learn
 ## About this Repo <a name="About"></a>
 The repo is subdivided into solution components.
 
-We welcome contributions to this repo in the form of fixes to existing components or addition of new components.
+We welcome contributions to this repo in the form of fixes to existing components or addition of new components. For more information on contributing, please see the [CONTRIBUTING](./CONTRIBUTING.md) guide.
 
 ## Components <a name="Components"></a>
 

@@ -1,4 +1,4 @@
-# Mergers & Acquisitions Integration Accelerator
+# Mergers & Acquisitions Integration Accelerator (MAIA)
 
 This repository contains a set of sample projects that contain the components of a solution that helps accelerate Mergers & Acquisitions (M&A) Integration. M&A often involves migrating or moving AWS accounts in to an existing organization. 
 Typically, during the M&A Integration phase, time is wasted due to inefficient communication and application of control objectives and technical requirements, as well as inaccurate and stale risk and compliance assessments.

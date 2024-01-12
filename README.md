@@ -28,4 +28,4 @@ We welcome contributions to this repo in the form of fixes to existing component
 
 # License <a name="License"></a>
 
-This library is licensed under the MIT-0 License.
+This library is licensed under the MIT-0 License. See the [LICENSE](./LICENSE) file.

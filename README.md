@@ -8,7 +8,7 @@ For a complete solution, you will be required to select [sample templates](https
 If you have additional questions regarding Mergers & Acquisitions, please contact our AWS Mergers & Acquisitions Advisory Team (AWS M&A Advisory). 
 This team is a group of subject matter experts and thought leaders at AWS with mergers & acquisitions expertise.
 
-If your organization is going through an M&A transaction and would like to learn more about how AWS supports customers throughout the transaction lifecycle, please reach out to the AWS Mergers & Acquisitions Advisory Team through your organization’s aligned AWS Account Manager with this [link](https://aws.amazon.com/contact-us/sales-support/).
+If your organization is going through an M&A transaction and would like to learn more about how AWS supports customers throughout the transaction lifecycle, please reach out to the AWS Mergers & Acquisitions Advisory Team through your organization’s aligned AWS Account Manager with this [link](https://aws.amazon.com/executive-insights/content/mergers-acquisitions-cloud-strategy-support/).
 
 ## Table of Contents
 1. [About this Repo](#About)

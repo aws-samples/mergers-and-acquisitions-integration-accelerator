@@ -131,8 +131,15 @@ export class Visualization extends Construct {
     const dataSourceId = `${props.application}-${props.environment}-athena`;
 
     //  QuickSight Principal ARN - have to update quicksight-user in cdk.json or pass as context argument
-    const qsPrincipalArn = `arn:aws:quicksight:${region}:${account}:user/default/${props.quicksightUser}`;
-
+    
+    let qsPrincipalArn = `arn:aws:quicksight:${region}:${account}:user/default/${props.quicksightUser}`;
+    const arnRegex = /^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):([a-zA-Z0-9\-]*):(\w+(?:-\w+)+):(\d{12}):(.*)$/;
+    const regex = new RegExp(arnRegex,'i');
+    const matches = regex.exec(qsPrincipalArn);
+    if (matches && matches.length === 6 && matches[2] === 'quicksight' && matches[5].startsWith('user')) {
+      qsPrincipalArn = props.quicksightUser;
+    }
+    
     //  QuickSight DataSource
     const dataSource = new CfnDataSource(this, "AthenaDataSource", {
       type: "ATHENA",
@@ -506,19 +513,19 @@ export class Visualization extends Construct {
       dataSetIdentifierDeclarations: [
         {
           identifier: "conformance-pack-compliance-detail",
-          dataSetArn: `arn:aws:quicksight:us-east-1:${account}:dataset/conformance-pack-compliance-detail`,
+          dataSetArn: `arn:aws:quicksight:${region}:${account}:dataset/conformance-pack-compliance-detail`,
         },
         {
           identifier: "questionnaire-answers-risks",
-          dataSetArn: `arn:aws:quicksight:us-east-1:${account}:dataset/questionnaire-answers-risks`,
+          dataSetArn: `arn:aws:quicksight:${region}:${account}:dataset/questionnaire-answers-risks`,
         },
         {
           identifier: "conformance-pack-compliance-remediation",
-          dataSetArn: `arn:aws:quicksight:us-east-1:${account}:dataset/conformance-pack-compliance-remediation`,
+          dataSetArn: `arn:aws:quicksight:${region}:${account}:dataset/conformance-pack-compliance-remediation`,
         },
         {
           identifier: "conformance-pack-compliance-summary",
-          dataSetArn: `arn:aws:quicksight:us-east-1:${account}:dataset/conformance-pack-compliance-summary`,
+          dataSetArn: `arn:aws:quicksight:${region}:${account}:dataset/conformance-pack-compliance-summary`,
         },
       ],
       sheets: [

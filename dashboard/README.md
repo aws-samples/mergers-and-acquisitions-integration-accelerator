@@ -50,12 +50,19 @@ If boostrapping for a different or multiple AWS Environments, then issue the fol
 
 You must have a [QuickSight Standard or Enterprise Subscription](https://docs.aws.amazon.com/quicksight/latest/user/signing-up.html) before deploying, and support for QuickSight-managed users must be enabled.
 
-Follow the instructions to manage accounts in [Amazon QuickSight Enterprise Edition](https://docs.aws.amazon.com/quicksight/latest/user/managing-users-enterprise.html), or [Amazon QuickSight Standard Edition](https://docs.aws.amazon.com/quicksight/latest/user/managing-users-standard.html), and retrieve the <code>Username</code> from the User Details.
+This CDK project uses the context variable <code>quicksight-user</code> when setting permissions for QuickSight resources created by this project, and this context variable must be set to a valid [QuickSight User ARN](https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-resource-arns.html). To list QuickSight users, issue the following command:
 
-This CDK project uses the context variable <code>quicksight-user</code> when setting permissions for QuickSight resources created by this project.
-Refer to the following instructions to [set the context variable](https://docs.aws.amazon.com/cdk/v2/guide/get_context_var.html) to the <code>Username</code>. 
+<pre><code>aws quicksight list-users --aws-account-id <i>aws-account-id</i> --namespace default</pre></code>
 
-**IMPORTANT**: To eliminate the need to pass the context variable <code>quicksight-user</code> to <code>cdk deploy --context quicksight-user=<em>username</em></code> you can update [cdk.json](./cdk.json) by setting the <code>quicksight-user</code> value.
+If you receive the following error, set the <code>--region</code> argument to the value returned for your QuickSight Identity region.
+
+<code>An error occurred (AccessDeniedException) when calling the ListUsers operation: Operation is being called from endpoint <i><aws region 1></i>, but your identity region is <i><aws region 2></i>. Please use the <i><aws region 2></i> endpoint.</code>
+
+<pre><code>aws quicksight list-users --aws-account-id <i>aws-account-id</i> --namespace default --region <i>aws-region</i></pre></code>
+
+Refer to the following instructions to [set the context variable](https://docs.aws.amazon.com/cdk/v2/guide/get_context_var.html) to the <code>quicksight-user-arn</code>. 
+
+**IMPORTANT**: To eliminate the need to pass the context variable <code>quicksight-user</code> to <code>cdk deploy --context quicksight-user=<em>quicksight-user-arn</em></code> you can update [cdk.json](./cdk.json) by setting the <code>quicksight-user</code> value.
 
 ## Build and Deploy
 
@@ -84,10 +91,11 @@ There are 3 steps that need to be performed manually after the CDK project is de
 
 First, create a mapping between AWS Config Rules and Playbooks. A [spreadsheet](./resources/config-rule-playbook-mapping/ConfigRulePlaybookMapping.xlsx) is part of this project and includes the mappings, as well as a [Python script](./resources/config-rule-playbook-mapping/load-config-rule-playbook-mapping.py) to process the spreadsheet and populate a DynamoDB table.
 
-Issue the following commands in a terminal window in Cloud9 to load the AWS Config Rule to Playbook mapping.
+Issue the following commands in a terminal window in Cloud9 to load the AWS Config Rule to Playbook mapping. The default value for the <code>region</code> argument is <i>us-east-1</i>. If executing from the default region, you can remove the <code>--region</code> argument.
 
 <pre><code>cd resources/config-rule-playbook-mapping/
-python load-config-rule-playbook-mapping.py</code></pre>
+pip install -r requirements.txt
+python load-config-rule-playbook-mapping.py --region <i>us-east-1</i></code></pre>
 
 Next, [define a workload in the AWS Well-Architected Tool](https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html) with the default AWS Well-Architected Framework Lens. After defining a workload, you can start the [workload review](https://docs.aws.amazon.com/wellarchitected/latest/userguide/tutorial-step2.html). For testing purposes, simply answer at least one question to cause the Well-Architected Tool to emit an event that will be processed and update the database.
 
